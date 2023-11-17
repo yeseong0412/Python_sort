@@ -38,16 +38,12 @@ def insertion_sort(lst):
 
 # 버블 정렬
 def bubble_sort(lst):
-    # 리스트의 마지막 요소부터 첫 번째 요소까지 역순으로 순회
-    for i in range(len(lst)):
-        # 첫 번째 요소부터 마지막에서 i번째 요소까지 순회
-        for j in range(0, len(lst) - i - 1):
-            # 현재 요소가 다음 요소보다 크면 두 요소를 교환
-            if lst[j] > lst[j + 1]:
+    n = len(lst)
+    for i in range(n-1, 0, -1):  # 리스트의 마지막 요소부터 첫 번째 요소까지 역순으로 순회
+        for j in range(i):  # 첫 번째 요소부터 마지막에서 i번째 요소까지 순회
+            if lst[j] > lst[j + 1]:  # 현재 요소가 다음 요소보다 크면 두 요소를 교환
                 lst[j], lst[j + 1] = lst[j + 1], lst[j]
-    # 정렬된 리스트 반환
     return lst
-
 
 # 퀵 정렬
 def quick_sort(A, left, right):
