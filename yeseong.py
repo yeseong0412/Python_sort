@@ -75,17 +75,6 @@ def quick_sort(A, left, right):
 
 
 # 합병 정렬
-def merge_sort(A, left, right):
-    global sorted_list
-    if left < right:
-        mid = (left + right) // 2  # 분할
-        merge_sort(A, left, mid)  # 분할
-        merge_sort(A, mid + 1, right)  # 분할
-        sorted_list = [0] * len(A)  # sorted_list를 0으로 초기화
-        merge(A, left, mid, right)  # 합병
-
-
-# 합병 정렬
 def merge(A, left, mid, right):
     i = left  # 왼쪽 리스트의 첫 번째 인덱스
     j = mid + 1  # 오른쪽 리스트의 첫 번째 인덱스
@@ -107,6 +96,18 @@ def merge(A, left, mid, right):
         j, k = j + 1, k + 1
     # 임시(sorted_list) 리스트를 원래(A) 리스트로 복사
     A[left: right + 1] = sorted_list[left: right + 1]
+
+# 합병 정렬
+def merge_sort(A, left, right):
+    global sorted_list
+    if left < right:
+        mid = (left + right) // 2  # 분할
+        merge_sort(A, left, mid)  # 분할
+        merge_sort(A, mid + 1, right)  # 분할
+        sorted_list = [0] * len(A)  # sorted_list를 0으로 초기화
+        merge(A, left, mid, right)  # 합병
+
+
 
 
 # 힙 정렬 1
