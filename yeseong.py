@@ -47,23 +47,21 @@ def bubble_sort(lst):
 
 # 퀵 정렬
 def quick_sort(A, left, right):
-    # - A: List[int] - 정렬할 입력 배열
-    # - left: int - 정렬할 범위의 왼쪽 인덱스
-    # - right: int - 정렬할 범위의 오른쪽 인덱스
 
     if left < right:
         # 포인터 초기화
-        i = left + 1
-        j = right
-        pivot = A[left]
+        i = left + 1 #최소
+        j = right #최대
+        pivot = A[left] #인덱스 값 설정
 
         # 파티션 단계
         while i <= j:
-            while i <= right and A[i] <= pivot:
+            while i <= right and A[i] <= pivot:  # 최소가 오른쪽보다 작고, 최소 값이 pivot 값보다 작으면 최소가 증가
                 i += 1
-            while j >= left and A[j] > pivot:
+            while j >= left and A[j] > pivot: # 최대가 왼쪽보다 크고, 최대 값이 pivot 값보다 크면 최대가 감소
                 j -= 1
             if i < j:
+                # 최대가 최소보다 크면 서로 위치를 바꿈
                 A[i], A[j] = A[j], A[i]
 
         # 피벗을 올바른 위치로 이동
@@ -155,35 +153,65 @@ def heapPush(heap, n):
 
 # 힙 정렬 2
 def heapPop(heap):
-    # 힙에서 최댓값을 제거하고 반환
+    # 힙에서 최댓값을 제거하고 반환하는 함수
+
+    # 힙의 크기 계산
     size = len(heap) - 1
+
+    # 힙이 비어있으면 None 반환
     if size == 0:
         return None
+
+    # 힙에서 최댓값을 저장하고 있는 루트 노드 추출
     p = 0
     i = 1
     root = heap[0]
+
+    # 힙의 마지막 노드 추출
     last = heap[size]
+
+    # 힙을 재구성하여 최댓값이 루트에 위치하도록 함
     while i <= size:
+        # 두 자식 노드 중 큰 값을 갖는 자식 선택
         if i < size and heap[i] < heap[i + 1]:
             i += 1
+
+        # 마지막 노드의 값이 선택된 자식보다 크거나 같으면 반복 종료
         if last >= heap[i]:
             break
+
+        # 선택된 자식의 값을 부모 노드로 이동
         heap[p] = heap[i]
+
+        # p와 i 갱신
         p = i
         i *= 2
+
+    # 마지막 노드의 값을 최종적으로 부모 노드로 이동
     heap[p] = last
+
+    # 힙에서 최댓값을 가진 루트 노드를 제거
     heap.pop()
+
+    # 값 반환
     return root
 
 # 힙 정렬 2
 def heap_sort(lst):
-    # 리스트를 힙에 넣고 다시 꺼내어 정렬
+    # 힙 초기화 (0번 인덱스는 사용하지 않음)
     heap = [0]
+
+    # 리스트의 각 원소를 힙에 삽입
     for e in lst:
         heapPush(heap, e)
+
+    # 힙에서 원소를 꺼내어 리스트를 정렬
     for i in range(1, len(lst) + 1):
         lst[-i] = heapPop(heap)
+
+    # 정렬된 리스트 반환
     return lst
+
 
 # 메뉴
 def print_menu():
